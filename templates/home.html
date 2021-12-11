@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Bonsai Application</title>
+    <link rel="stylesheet" href={{ url_for( 'static', filename='css/home.css' ) }} />
+    <link rel="stylesheet" href={{ url_for( 'static', filename='css/topStyle.css' ) }} />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        /* LOGO Navbar */
+        
+        #logo {
+            height: 40px;
+            width: 100px;
+            margin-left: 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-right: 20px;
+            float: left;
+        }
+        /*Image Item Style*/
+        
+        .card-title {
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+        
+        .card-text {
+            font-size: 0.85rem;
+        }
+        
+        #itemImage {
+            width: 100%;
+            height: 300px;
+        }
+        
+        .column {
+            margin: 10px 0px;
+            text-align: center;
+        }
+        
+        .mr-4 {
+            padding-right: 25px;
+            padding-left: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="title">
+        <a href="/">
+            <img id="logo" src={{ url_for( 'static', filename='Images/logo.jpg' ) }} />
+        </a>
+        <form action={{ url_for( 'searchItem' ) }}>
+            <input id="searchBox" type="text" name="searchQuery">
+            <input id="searchButton" type="submit" value="Search">
+        </form>
+
+        {% if not loggedIn %}
+        <div id="signInButton">
+            <a class="link" href="/loginForm">Sign In</a>
+        </div>
+        {% else %}
+        <div class="dropdown">
+            <button class="dropbtn">Hello, <br>{{firstName}}</button>
+            <div class="dropdown-content">
+                <a href="/account/orders">Your orders</a>
+                <a href="/account/profile">Your profile</a>
+                <hr>
+                <a href="/logout">Sign Out</a>
+            </div>
+        </div>
+        {% endif %}
+        <div id="kart">
+            <a class="link" href="/cart">
+                <img src={{url_for( 'static', filename='images/shoppingCart.png' )}} id="cartIcon" /> CART {{noOfItems}}
+            </a>
+        </div>
+    </div>
+    <div class="display">
+        <div class="displayCategory">
+            <h2>Shop by Category: </h2>
+            <ul>
+                {% for row in categoryData %}
+                <li><a href="/displayCategory?categoryId={{row[0]}}">{{row[1]}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <!-- IMAGE SECTION -->
+    <div class="container mt-5">
+        <div class="row">
+            {% for product in itemData %}
+            <div class="col-md-6 col-xs-12 col-lg-3 column h-100">
+                <div class="card">
+                    <a href="/productDescription?productId={{product[0]}}">
+                        <img src="{{ url_for( 'static', filename='uploads/' + product[4]) }}" id="itemImage" class="img-thumbnail" alt="{{product[1]}}">
+                    </a>
+                    <div class="card-body">
+                        <p class="card-title">{{product[1]}}</p>
+                        <p class="card-text">{{product[3][0:500] | truncate(150) }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="card-text"><span style="font-weight: bold;">Book Price: </span>Rs.{{product[2] | int}}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

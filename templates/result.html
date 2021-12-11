@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <table>
+            <tr id="productName">
+                {% for product in products %}
+                <td>
+                    <a href="/productDescription?productId={{product[0]}}">{{product[1]}}</a>
+                </td>
+                <!-- </tr> -->
+                <!-- <tr id="productImage"> -->
+                <td>
+                    <img src={{ url_for( 'static', filename='uploads/' + product[4]) }} id="itemImage" />
+                </td>
+                {% endfor %}
+            </tr>
+
+        </table>
+    </div>
+</body>
+
+</html>

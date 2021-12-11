@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonsai Application</title>
+</head>
+
+<body>
+    <div id="display">
+        <h2>Edit profile</h2>
+        <form action="/updateProduct" method="POST">
+            <p>ProductId: <input type="number" name="productid" value={{productData[0]}} readonly="readonly"></p>
+            <!-- Without value = " ", it will take only first word only. -->
+            <p>Product Name: <input type="textarea" name="productname" value="{{productData[1]}}"></p>
+            <p>Price: <input type="text" name="price" value={{productData[2]}}></p>
+            <p>Description: <textarea name="description" cols="40" rows="8">{{productData[3]}}</textarea></p>
+            <p>Stock: <input type="number" name="stock" value={{productData[5]}}></p>
+            <input type="submit" value="Save">
+        </form>
+    </div>
+</body>
+
+</html>

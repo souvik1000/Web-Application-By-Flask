@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Admin</title>
+</head>
+
+<body>
+    <h2>Add items</h2>
+    <form action="/addItem" method="POST" enctype="multipart/form-data">
+        <label>Name: </label> <input type="text" name="name" placeholder="Product Name"><br>
+
+        <label>Price: </label> <input type="text" name="price" placeholder="Price"><br>
+
+        <label>Description: </label> <textarea name="description" rows=3 cols="40" placeholder="About product"></textarea><br>
+
+        <label> Image: </label> <input type="file" name="image" placeholder="image"><br>
+
+        <label>Stock: </label> <input type="text" name="stock" placeholder="stock in number"><br>
+
+        <label>Category: </label>
+        <select name="category">
+            <option value="Select">Select</option>
+            {% for category in categoryData %}
+                <option value="{{category[0]}}">{{category[1]}}</option>
+            {% endfor %}
+		</select><br>
+        <input type="submit">
+    </form>
+</body>
+
+</html>

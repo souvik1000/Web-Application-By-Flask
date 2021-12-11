@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Option 1: Include in HTML -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/adminpanel.css') }}" rel="stylesheet">
+    <title>Bonsai Application</title>
+    <style>
+        .bi {
+            color: brown;
+            transform: scale(1.4);
+        }
+        
+        .nav-link {
+            padding: 5px 5px;
+        }
+        
+        #adminpanel p {
+            display: inline-block;
+        }
+        
+        .editanchor {
+            text-decoration: none;
+            padding: 10px;
+            color: white;
+            background-color: #003b00;
+        }
+        
+        .editanchor:hover {
+            padding: 15px;
+            color: green;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="adminpanel">
+        <div id="formsection" class="form-section">
+            <div id="additemform" class="additemform">
+                {% include 'add.html' %}
+            </div>
+            <div>
+                <div id="search">
+                    <h2>Search Product For Editing</h2>
+                    <form action="/editItem" method="POST">
+                        <label>Product Name: </label>
+                        <input type="text" name="productname" placeholder="Enter product name" />
+                        <input class="btn btn-success" type="submit" value="Edit Product" onsubmit="onclickevent()" />
+                    </form>
+                </div>
+                <a class="editanchor" href="/delete">Delete Items</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="showitems">
+        {% include 'showitem.html' %}
+    </div>
+
+</body>
+
+</html>

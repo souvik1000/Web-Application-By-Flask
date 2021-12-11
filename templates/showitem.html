@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonsai Application</title>
+    <style>
+        .card-title {
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+        
+        .card-text {
+            font-size: 0.85rem;
+        }
+        
+        #itemImage {
+            width: 100%;
+            height: 300px;
+        }
+        
+        .column {
+            margin: 10px 0px;
+            text-align: center;
+        }
+        
+        .mr-4 {
+            padding-right: 25px;
+            padding-left: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            {% for product in itemData %}
+            <div class="col-md-3 column h-100">
+                <div class="card">
+                    <img src="{{ url_for( 'static', filename='uploads/' + product[4]) }}" id="itemImage" class="img-thumbnail" alt="{{product[1]}}">
+                    <div class="card-body">
+                        <p class="card-title">{{product[1]}}</p>
+                        <p class="card-text">{{product[3][0:500] | truncate(150) }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="card-text"><span style="font-weight: bold;">Book Price: </span>Rs.{{product[2] | int}}</p>
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-success mr-4" href="{{ ['/editItem?productname', product[1]] | join('=') }}">Edit</a>
+                        <a class="btn btn-success" href="{{ ['/removeItem?productname', product[1]] | join('=') }}">Remove</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>
